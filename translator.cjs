@@ -21,11 +21,10 @@ class Translator {
       this.translatorService === 'openai' &&
       process.env.OPENAI_API_KEY !== ''
     ) {
-      const { Configuration, OpenAIApi } = require('openai');
-      this.configuration = new Configuration({
+      const OpenAI = require('openai');
+      this.openai = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY,
       });
-      this.openai = new OpenAIApi(this.configuration);
     } else {
       return "ERROR: OpenAI API key is not set but the translator service is set to 'openai'";
     }
