@@ -1,4 +1,5 @@
 const { createLogger, transports, format } = require('winston');
+const path = require('path');
 
 const logger = createLogger({
   level: 'info',
@@ -10,7 +11,7 @@ const logger = createLogger({
   ),
   transports: [
     new transports.Console(),
-    new transports.File({ filename: 'combined.log' })
+    new transports.File({ filename: path.join(__dirname, '..', 'logs', 'combined.log') }) // Save logs to 'logs/combined.log'
   ],
 });
 

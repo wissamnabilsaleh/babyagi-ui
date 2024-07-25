@@ -1,4 +1,5 @@
 import { AgentStatus, Message } from '@/types';
+import logger from '@/utils/logger';
 import { setupMessage } from '@/utils/message';
 import { getUserApiKey } from '@/utils/settings';
 import {
@@ -14,6 +15,22 @@ export interface Task {
   taskName: string;
 }
 
+const { fetchOpenAI } = require('./path/to/fetchOpenAI'); // Adjust the path as necessary
+
+async function someFunction() {
+  const url = 'https://api.openai.com/v1/your-endpoint';
+  const body = { model: 'gpt-4o-mini', prompt: 'Hello, world!' };
+  const apiKey = 'your-api-key';
+
+  try {
+    const result = await fetchOpenAI(url, body, apiKey);
+    console.log(result);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+someFunction();
 export class BabyAGI {
   objective: string;
   modelName: string;
@@ -148,12 +165,15 @@ export class BabyAGI {
       .catch((error) => {
         if (error.name === 'AbortError') {
           console.log('Request aborted', error.message);
+logger.error(`Request aborted: ${error.message}`);
         } else {
           console.log(error.message);
+logger.error(`Error: ${error.message}`);
         }
       });
 
-    return response?.data?.response;
+    logger.info(`API Response: ${response?.data?.response}`);
+return response?.data?.response;
   }
 
   async taskCreation(
@@ -193,12 +213,15 @@ export class BabyAGI {
       .catch((error) => {
         if (error.name === 'AbortError') {
           console.log('Request aborted', error.message);
+logger.error(`Request aborted: ${error.message}`);
         } else {
           console.log(error.message);
+logger.error(`Error: ${error.message}`);
         }
       });
 
-    return response?.data?.response;
+    logger.info(`API Response: ${response?.data?.response}`);
+return response?.data?.response;
   }
 
   async taskPrioritization(objective: string, taskID: number) {
@@ -233,12 +256,15 @@ export class BabyAGI {
       .catch((error) => {
         if (error.name === 'AbortError') {
           console.log('Request aborted', error.message);
+logger.error(`Request aborted: ${error.message}`);
         } else {
           console.log(error.message);
+logger.error(`Error: ${error.message}`);
         }
       });
 
-    return response?.data?.response;
+    logger.info(`API Response: ${response?.data?.response}`);
+return response?.data?.response;
   }
 
   async enrich(task: Task, result: string, index: string) {
@@ -270,12 +296,15 @@ export class BabyAGI {
       .catch((error) => {
         if (error.name === 'AbortError') {
           console.log('Request aborted', error.message);
+logger.error(`Request aborted: ${error.message}`);
         } else {
           console.log(error.message);
+logger.error(`Error: ${error.message}`);
         }
       });
 
-    return response?.data?.response;
+    logger.info(`API Response: ${response?.data?.response}`);
+return response?.data?.response;
   }
 
   // only used for client-side openai api requests
@@ -308,12 +337,15 @@ export class BabyAGI {
       .catch((error) => {
         if (error.name === 'AbortError') {
           console.log('Request aborted', error.message);
+logger.error(`Request aborted: ${error.message}`);
         } else {
           console.log(error.message);
+logger.error(`Error: ${error.message}`);
         }
       });
 
-    return response?.data?.response;
+    logger.info(`API Response: ${response?.data?.response}`);
+return response?.data?.response;
   }
 
   async addTask(taskID: string, taskName: string) {
